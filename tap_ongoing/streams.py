@@ -1,62 +1,48 @@
 """Stream type classes for tap-ongoing."""
 
+import requests
 from pathlib import Path
-from typing import Any, Dict, Optional, Union, List, Iterable
-
-from singer_sdk import typing as th  # JSON Schema typing helpers
+from typing import Any, Dict, Optional
 
 from tap_ongoing.client import OngoingStream
 
-# TODO: Delete this is if not using json files for schema definition
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
-# TODO: - Override `UsersStream` and `GroupsStream` with your own stream definition.
-#       - Copy-paste as many times as needed to create multiple stream types.
 
 
-class UsersStream(OngoingStream):
+class PurchaseOrderStream(OngoingStream):
     """Define custom stream."""
-    name = "users"
-    path = "/users"
-    primary_keys = ["id"]
-    replication_key = None
-    # Optionally, you may also use `schema_filepath` in place of `schema`:
-    # schema_filepath = SCHEMAS_DIR / "users.json"
-    schema = th.PropertiesList(
-        th.Property("name", th.StringType),
-        th.Property(
-            "id",
-            th.StringType,
-            description="The user's system ID"
-        ),
-        th.Property(
-            "age",
-            th.IntegerType,
-            description="The user's age in years"
-        ),
-        th.Property(
-            "email",
-            th.StringType,
-            description="The user's email address"
-        ),
-        th.Property("street", th.StringType),
-        th.Property("city", th.StringType),
-        th.Property(
-            "state",
-            th.StringType,
-            description="State name in ISO 3166-2 format"
-        ),
-        th.Property("zip", th.StringType),
-    ).to_dict()
+    name = "purchase_orders"
+    path = "/purchaseOrders"
+    primary_keys = ["purchaseOrderId", "articleSystemId"]
+    schema_filepath = SCHEMAS_DIR / "purchase_orders.json"
 
+    def get_next_page_token(
+        self, response: requests.Response, previous_token: Optional[Any]
+    ) -> Optional[Any]:
+        """Return a token for identifying next page or None if no more pages."""
 
-class GroupsStream(OngoingStream):
-    """Define custom stream."""
-    name = "groups"
-    path = "/groups"
-    primary_keys = ["id"]
-    replication_key = "modified"
-    schema = th.PropertiesList(
-        th.Property("name", th.StringType),
-        th.Property("id", th.StringType),
-        th.Property("modified", th.DateTimeType),
-    ).to_dict()
+        if len(response.json()) == 0:
+            return None
+
+        if not previous_token:
+            next_page_token = max([
+                order.get("purchaseOrderInfo").get("purchaseOrderId")
+                    for order in response.json()
+            ])
+        else:
+            next_page_token = previous_token + 1
+
+        return next_page_token
+
+    def get_url_params(
+        self, context: Optional[dict], next_page_token: Optional[Any]
+    ) -> Dict[str, Any]:
+        """Return a dictionary of values to be used in URL parameterization."""
+        params: dict = {}
+        params["goodsOwnerId"] = self.config.get("goods_owner_id")
+        params["lastReceiveTimeFrom"] = self.config.get("last_receive_time_from")
+        params["maxPurchaseOrdersToGet"] = self.config.get("max_purchase_orders_to_get")
+        params["purchaseOrderIdFrom"] = next_page_token
+        params[self.replication_key] = self.replication_key
+
+        return params

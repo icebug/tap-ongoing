@@ -1,0 +1,252 @@
+{
+    "type": "object",
+    "properties": {
+        "purchaseOrderInfo": {
+            "type": "object",
+            "properties": {
+                "purchaseOrderId": {
+                    "type": "integer"
+                },
+                "purchaseOrderNumber": {
+                    "type": "string"
+                },
+                "supplierOrderNumber": {
+                    "type": "string"
+                },
+                "goodsOwnerReference": {
+                    "type": "string"
+                },
+                "referenceNumber": {
+                    "type": "string"
+                },
+                "purchaseOrderStatus": {
+                    "type": "object",
+                    "properties": {
+                        "number": {
+                            "type": "integer"
+                        },
+                        "text": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "purchaseOrderType": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "inDate": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "purchaseOrderRemark": {
+                    "type": "string"
+                },
+                "warehouse": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "properties": {
+                        "id": {
+                            "type": "integer"
+                        },
+                        "code": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "createdDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "advanced": {
+                    "type": "object",
+                    "properties": {
+                        "arrivalDate": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "format": "date-time"
+                        },
+                        "orderDate": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "container": {
+                            "type": "string"
+                        },
+                        "purchaseOrderIsReturnType": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "freeValues": {
+                    "type": "object",
+                    "properties": {
+                        "freeText1": {
+                            "type": "string"
+                        },
+                        "freeText2": {
+                            "type": "string"
+                        },
+                        "freeText3": {
+                            "type": "string"
+                        },
+                        "freeText4": {
+                            "type": "string"
+                        },
+                        "freeText5": {
+                            "type": "string"
+                        },
+                        "freeDecimal1": {
+                            "type": [
+                                "integer",
+                                "null"
+                            ]
+                        },
+                        "freeDecimal2": {
+                            "type": [
+                                "integer",
+                                "null"
+                            ]
+                        },
+                        "freeBool1": {
+                            "type": "boolean"
+                        },
+                        "freeBool2": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        },
+        "purchaseOrderLines": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "rowNumber": {
+                        "type": "string"
+                    },
+                    "article": {
+                        "type": "object",
+                        "properties": {
+                            "articleSystemId": {
+                                "type": "integer"
+                            },
+                            "articleNumber": {
+                                "type": "string"
+                            },
+                            "articleName": {
+                                "type": "string"
+                            },
+                            "productCode": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "rowPrice": {
+                        "type": "number"
+                    },
+                    "advisedNumberOfItems": {
+                        "type": "number"
+                    },
+                    "receivedNumberOfItems": {
+                        "type": "number"
+                    },
+                    "reportedNumberOfItems": {
+                        "type": "number"
+                    },
+                    "articleItems": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "originalArticleItemId": {
+                                    "type": "integer"
+                                },
+                                "numberOfItems": {
+                                    "type": "number"
+                                },
+                                "inDate": {
+                                    "type": "string"
+                                },
+                                "serial": {
+                                    "type": "string"
+                                },
+                                "caseNumber": {
+                                    "type": "string"
+                                },
+                                "batchNumber": {
+                                    "type": "string"
+                                },
+                                "container": {
+                                    "type": "string"
+                                },
+                                "comment": {
+                                    "type": "string"
+                                },
+                                "weight": {
+                                    "type": "number"
+                                },
+                                "expiryDate": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "format": "date-time"
+                                },
+                                "location": {
+                                    "type": "string"
+                                },
+                                "articleItemStatus": {
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "subPurchaseOrderLines": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "externalOrderLineId": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
