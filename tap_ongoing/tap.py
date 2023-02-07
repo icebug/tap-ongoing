@@ -7,18 +7,19 @@ from singer_sdk import Tap, Stream
 from singer_sdk import typing as th  # JSON schema typing helpers
 
 from tap_ongoing.streams import (
-    PurchaseOrderStream
+    PurchaseOrderStream,
+    OrderStream
 )
 
+# TODO
 STREAM_TYPES = [
-    PurchaseOrderStream
+    #PurchaseOrderStream,
+    OrderStream
 ]
 
 class TapOngoing(Tap):
     """Ongoing tap class."""
     name = "tap-ongoing"
-
-    records_jsonpath = "$.data[*]"
 
     def discover_streams(self) -> List[Stream]:
         """Return a list of discovered streams."""

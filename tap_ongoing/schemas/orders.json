@@ -1,0 +1,421 @@
+{
+    "type": "object",
+    "properties": {
+        "orderInfo": {
+            "type": "object",
+            "properties": {
+                "orderId": {
+                    "type": "integer"
+                },
+                "orderNumber": {
+                    "type": "string"
+                },
+                "orderRemark": {
+                    "type": "string"
+                },
+                "deliveryInstruction": {
+                    "type": "string"
+                },
+                "servicePointCode": {
+                    "type": "string"
+                },
+                "freeText1": {
+                    "type": "string"
+                },
+                "freeText2": {
+                    "type": "string"
+                },
+                "freeText3": {
+                    "type": "string"
+                },
+                "orderType": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "wayOfDelivery": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "deliveryDate": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "createdDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "shippedTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "wayBill": {
+                    "type": "string" 
+                },
+                "returnWayBill": {
+                    "type": "string"
+                },
+                "orderStatus": {
+                    "type": "object",
+                    "properties": {
+                        "number": {
+                            "type": "integer"
+                        },
+                        "text": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "emailNotification": {
+                    "type": "object",
+                    "properties": {
+                        "toBeNotified": {
+                            "type": "boolean"
+                        },
+                        "value": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "toBeNotified",
+                        "value"
+                    ]
+                },
+                "smsNotification": {
+                    "type": "object",
+                    "properties": {
+                        "toBeNotified": {
+                            "type": "boolean"
+                        },
+                        "value": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "toBeNotified",
+                        "value"
+                    ]
+                },
+                "telephoneNotification": {
+                    "type": "object",
+                    "properties": {
+                        "toBeNotified": {
+                            "type": "boolean"
+                        },
+                        "value": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "toBeNotified",
+                        "value"
+                    ]
+                },
+                "orderedNumberOfItems": {
+                    "type": "number"
+                },
+                "allocatedNumberOfItems": {
+                    "type": "number"
+                },
+                "pickedNumberOfItems": {
+                    "type": "number"
+                },
+                "termsOfDeliveryType": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "warehouseInstruction": {
+                    "type": "string"
+                },
+                "pickingPriority": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "productionCode": {
+                    "type": "string"
+                },
+                "advanced": {
+                    "type": "object",
+                    "properties": {
+                        "invoiceNumber": {
+                            "type": "string"
+                        },
+                        "arrivalDate": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "format": "date-time"
+                        },
+                        "deliveryDateWithTime": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                }
+            }
+        },
+        "parcels": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "parcelNumber": {
+                        "type": "string"
+                    },
+                    "isReturnParcel": {
+                        "type": "boolean"
+                    },
+                    "tracking": {
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "properties": {
+                            "trackingUrl": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "orderLines": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "rowNumber": {
+                        "type": "string"
+                    },
+                    "article": {
+                        "type": "object",
+                        "properties": {
+                            "articleNumber": {
+                                "type": "string"
+                            },
+                            "articleKind": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "orderedNumberOfItems": {
+                        "type": "number"
+                    },
+                    "allocatedNumberOfItems": {
+                        "type": "number"
+                    },
+                    "pickedNumberOfItems": {
+                        "type": "number"
+                    },
+                    "packedNumberOfItems": {
+                        "type": "number"
+                    },
+                    "reportedNumberOfItems": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "shouldBePicked": {
+                        "type": "boolean"
+                    },
+                    "pickedArticleItems": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "articleItemId": {
+                                    "type": "integer"
+                                },
+                                "numberOfItems": {
+                                    "type": "number"
+                                },
+                                "inDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "isPicked": {
+                                    "type": "boolean"
+                                },
+                                "isReturned": {
+                                    "type": "boolean"
+                                },
+                                "expiryDate": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "format": "date-time"
+                                },
+                                "returnDate": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "format": "date-time"
+                                },
+                                "pickedTime": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "format": "date-time"
+                                },
+                                "returnCause": {
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "location": {
+                                    "type": "string"
+                                },
+                                "locationTypeCode": {
+                                    "type": "string"
+                                },
+                                "articleItemStatus": {
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "freeText1": {
+                                    "type": "string"
+                                },
+                                "packedTime": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "format": "date-time"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "transporter": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "transporterName": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            }
+        },
+        "returnTransporter": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "transporterName": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            }
+        },
+        "tracking": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "trackingUrl": {
+                    "type": "string"
+                },
+                "created": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "classes": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "shipmentInfo": {
+            "type": "object",
+            "properties": {
+                "shipmentId": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
