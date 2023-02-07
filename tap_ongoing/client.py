@@ -2,6 +2,9 @@
 
 from pathlib import Path
 
+from typing import Optional
+from datetime import datetime
+
 from singer_sdk.streams import RESTStream
 from singer_sdk.authenticators import BasicAuthenticator
 
@@ -31,6 +34,8 @@ class OngoingStream(RESTStream):
         headers = {}
         if "user_agent" in self.config:
             headers["User-Agent"] = self.config.get("user_agent")
-        # If not using an authenticator, you may also provide inline auth headers:
-        # headers["Private-Token"] = self.config.get("auth_token")
         return headers
+
+    def post_process(self, row: dict, context: Optional[dict]) -> dict:
+        row["extraction_date"] = datetime.now().isoformat()
+        return row

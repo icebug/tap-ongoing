@@ -416,6 +416,10 @@
                     "type": "integer"
                 }
             }
+        },
+        "extraction_date": {
+            "type": "string",
+            "format": "date-time"
         }
     }
 }
