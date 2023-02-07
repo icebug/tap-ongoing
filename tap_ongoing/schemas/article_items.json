@@ -1,0 +1,65 @@
+{
+    "type": "object",
+    "properties": {
+        "articleSystemId": {
+            "type": "string"
+        },
+        "articleNumber": {
+            "type": "string"
+        },
+        "items": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "batch": {
+                        "type": "string"
+                    },
+                    "container": {
+                        "type": "string"
+                    },
+                    "expiryDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "isLocked": {
+                        "type": "boolean"
+                    },
+                    "isLockedForSale": {
+                        "type": "boolean"
+                    },
+                    "location": {
+                        "type": "string"
+                    },
+                    "numberOfItems": {
+                        "type": "number"
+                    },
+                    "status": {
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "inDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -4,17 +4,18 @@ from typing import List, Optional
 from datetime import datetime
 
 from singer_sdk import Tap, Stream
-from singer_sdk import typing as th  # JSON schema typing helpers
 
 from tap_ongoing.streams import (
     PurchaseOrderStream,
-    OrderStream
+    OrderStream,
+    ArticleItemStream
 )
 
 # TODO
 STREAM_TYPES = [
     #PurchaseOrderStream,
-    OrderStream
+    OrderStream,
+    #ArticleItemStream
 ]
 
 class TapOngoing(Tap):

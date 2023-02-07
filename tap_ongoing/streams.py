@@ -29,7 +29,7 @@ class PurchaseOrderStream(OngoingStream):
                     for order in response.json()
             ])
         else:
-            next_page_token = previous_token + 1
+            next_page_token = previous_token + self.config.get("max_purchase_orders_to_get") + 1
 
         return next_page_token
 
@@ -67,7 +67,7 @@ class OrderStream(OngoingStream):
                     for order in response.json()
             ])
         else:
-            next_page_token = previous_token + 1
+            next_page_token = previous_token + self.config.get("max_orders_to_get") + 1
 
         return next_page_token
 
@@ -80,5 +80,40 @@ class OrderStream(OngoingStream):
         params["orderCreatedTimeFrom"] = self.config.get("order_created_time_from")
         params["maxOrdersToGet"] = self.config.get("max_orders_to_get")
         params["orderIdFrom"] = next_page_token
+
+        return params
+
+class ArticleItemStream(OngoingStream):
+    """Detailed information about articles in stock."""
+    name = "article_items"
+    path = "/articleItems"
+    primary_keys = ["articleSystemId", "articleNumber"]
+    schema_filepath = SCHEMAS_DIR / "article_items.json"
+
+    def get_next_page_token(
+        self, response: requests.Response, previous_token: Optional[Any]
+    ) -> Optional[Any]:
+        """Return a token for identifying next page or None if no more pages."""
+
+        if len(response.json()) == 0:
+            return None
+
+        if not previous_token:
+            next_page_token = max([
+                article.get("articleSystemId") for article in response.json()
+            ])
+        else:
+            next_page_token = previous_token + self.config.get("max_articles_to_get") + 1
+
+        return next_page_token
+
+    def get_url_params(
+        self, context: Optional[dict], next_page_token: Optional[Any]
+    ) -> Dict[str, Any]:
+        """Return a dictionary of values to be used in URL parameterization."""
+        params: dict = {}
+        params["goodsOwnerId"] = self.config.get("goods_owner_id")
+        params["maxArticlesToGet"] = self.config.get("max_articles_to_get")
+        params["articleSystemIdFrom"] = next_page_token
 
         return params
