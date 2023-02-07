@@ -23,15 +23,11 @@ class PurchaseOrderStream(OngoingStream):
         if len(response.json()) == 0:
             return None
 
-        if not previous_token:
-            next_page_token = max([
-                order.get("purchaseOrderInfo").get("purchaseOrderId")
-                    for order in response.json()
-            ])
-        else:
-            next_page_token = previous_token + self.config.get("max_purchase_orders_to_get") + 1
-
-        return next_page_token
+        max_previous_id = max([
+            order.get("purchaseOrderInfo").get("purchaseOrderId")
+                for order in response.json()
+        ])
+        return max_previous_id + 1
 
     def get_url_params(
         self, context: Optional[dict], next_page_token: Optional[Any]
@@ -61,15 +57,11 @@ class OrderStream(OngoingStream):
         if len(response.json()) == 0:
             return None
 
-        if not previous_token:
-            next_page_token = max([
-                order.get("orderInfo").get("orderId")
-                    for order in response.json()
-            ])
-        else:
-            next_page_token = previous_token + self.config.get("max_orders_to_get") + 1
-
-        return next_page_token
+        max_previous_id = max([
+            order.get("orderInfo").get("orderId")
+                for order in response.json()
+        ])
+        return max_previous_id + 1
 
     def get_url_params(
         self, context: Optional[dict], next_page_token: Optional[Any]
@@ -98,14 +90,10 @@ class ArticleItemStream(OngoingStream):
         if len(response.json()) == 0:
             return None
 
-        if not previous_token:
-            next_page_token = max([
-                article.get("articleSystemId") for article in response.json()
-            ])
-        else:
-            next_page_token = previous_token + self.config.get("max_articles_to_get") + 1
-
-        return next_page_token
+        max_previous_id = max([
+            article.get("articleSystemId") for article in response.json()
+        ])
+        return max_previous_id + 1
 
     def get_url_params(
         self, context: Optional[dict], next_page_token: Optional[Any]

@@ -13,9 +13,9 @@ from tap_ongoing.streams import (
 
 # TODO
 STREAM_TYPES = [
-    #PurchaseOrderStream,
+    PurchaseOrderStream,
     OrderStream,
-    #ArticleItemStream
+    ArticleItemStream
 ]
 
 class TapOngoing(Tap):
