@@ -48,9 +48,6 @@
                     "type": "string",
                     "format": "date"
                 },
-                "purchaseOrderRemark": {
-                    "type": "string"
-                },
                 "warehouse": {
                     "type": [
                         "object",
@@ -90,44 +87,6 @@
                             "type": "string"
                         },
                         "purchaseOrderIsReturnType": {
-                            "type": "boolean"
-                        }
-                    }
-                },
-                "freeValues": {
-                    "type": "object",
-                    "properties": {
-                        "freeText1": {
-                            "type": "string"
-                        },
-                        "freeText2": {
-                            "type": "string"
-                        },
-                        "freeText3": {
-                            "type": "string"
-                        },
-                        "freeText4": {
-                            "type": "string"
-                        },
-                        "freeText5": {
-                            "type": "string"
-                        },
-                        "freeDecimal1": {
-                            "type": [
-                                "integer",
-                                "null"
-                            ]
-                        },
-                        "freeDecimal2": {
-                            "type": [
-                                "integer",
-                                "null"
-                            ]
-                        },
-                        "freeBool1": {
-                            "type": "boolean"
-                        },
-                        "freeBool2": {
                             "type": "boolean"
                         }
                     }
